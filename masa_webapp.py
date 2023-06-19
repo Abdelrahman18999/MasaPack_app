@@ -16,9 +16,6 @@ st.header("Upload The Product Image")
 # Upload an image file
 file = st.file_uploader('', type=['jpeg', 'jpg', 'png'])
 
-# Load the saved model
-model = load_model('my_model.h5', compile=False)
-
 # Classification Function
 def classify(image, model, classNames):
     target_size = 224
@@ -49,6 +46,8 @@ def classify(image, model, classNames):
     return classname, confidence_score
 
 # Display image and perform classification
+# Load the saved model
+model = load_model('my_model.h5')
 if file is not None:
     classNames = ['Flawless', 'Defect']
     image = Image.open(file).convert('L')  # Read the image in grayscale
