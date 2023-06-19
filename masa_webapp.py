@@ -23,7 +23,7 @@ def classify(image, model, classNames):
     target_size = (224, 224)
 
     # Resize the image
-    resized_image = image.resize(target_size)
+    resized_image = np.resize(image, target_size)
 
     # Convert the cropped image to a NumPy array
     #np_image = np.array(cropped_image)
