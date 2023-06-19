@@ -25,8 +25,11 @@ def classify(image, model, classNames):
     # Resize the image
     resized_image = np.resize(image, target_size)
 
+    # Define the cropping coordinates
+    x1, y1, x2, y2 = 50, 40, 150, 140
+
     # Crop the image
-    cropped_image = resized_image.crop((50, 40, 150, 140))
+    cropped_image = resized_image[y1:y2, x1:x2]
 
     # Convert the cropped image to a NumPy array
     #np_image = np.array(cropped_image)
