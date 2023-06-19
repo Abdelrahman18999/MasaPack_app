@@ -18,14 +18,18 @@ file = st.file_uploader('', type=['jpeg', 'jpg', 'png'])
 
 # Classification Function
 def classify(image, model, classNames):
-    target_size = 224
 
-    resized_image = cv2.resize(image, (target_size, target_size))
-    cropped_image = resized_image[40:140, 50:150]
-    scaled_image = cropped_image.astype("float32") / 255.0
+    # Define the target size
+    target_size = (224, 224)
 
-    # convert the image to a numpy array
-    #img_array = np.array(scaled_image)
+    # Resize the image
+    resized_image = image.resize(target_size)
+
+    # Convert the cropped image to a NumPy array
+    #np_image = np.array(cropped_image)
+
+    # Normalize the image
+    scaled_image = resized_image.astype("float32") / 255.0
 
     # expand the dimensions to match the input shape of the model
     img_array = np.expand_dims(scaled_image, axis=0)
@@ -51,7 +55,9 @@ model = load_model('my_model.h5')
 if file is not None:
     classNames = ['Flawless', 'Defect']
     image = Image.open(file).convert('L')  # Read the image in grayscale
-    image_cv = np.array(image)
+    # Crop the image
+    cropped_image = image.crop((50, 40, 150, 140))
+    image_cv = np.array(cropped_image)
 
     st.image(image, use_column_width=True)
 
