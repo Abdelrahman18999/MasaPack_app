@@ -25,11 +25,14 @@ def classify(image, model, classNames):
     # Resize the image
     resized_image = np.resize(image, target_size)
 
+    # Crop the image
+    cropped_image = resized_image.crop((50, 40, 150, 140))
+
     # Convert the cropped image to a NumPy array
     #np_image = np.array(cropped_image)
 
     # Normalize the image
-    scaled_image = resized_image.astype("float32") / 255.0
+    scaled_image = cropped_image.astype("float32") / 255.0
 
     # expand the dimensions to match the input shape of the model
     img_array = np.expand_dims(scaled_image, axis=0)
@@ -55,9 +58,7 @@ model = load_model('my_model.h5')
 if file is not None:
     classNames = ['Flawless', 'Defect']
     image = Image.open(file).convert('L')  # Read the image in grayscale
-    # Crop the image
-    cropped_image = image.crop((50, 40, 150, 140))
-    image_cv = np.array(cropped_image)
+    image_cv = np.array(image)
 
     st.image(image, use_column_width=True)
 
