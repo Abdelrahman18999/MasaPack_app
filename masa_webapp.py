@@ -25,10 +25,10 @@ def classify(image, model, classNames):
     scaled_image = cropped_image.astype("float32") / 255.0
 
     # convert the image to a numpy array
-    img_array = np.array(scaled_image)
+    #img_array = np.array(scaled_image)
 
     # expand the dimensions to match the input shape of the model
-    img_array = np.expand_dims(img_array, axis=0)
+    img_array = np.expand_dims(scaled_image, axis=0)
 
     # make a prediction using the loaded model
     prediction = model.predict(img_array)
