@@ -42,14 +42,14 @@ def classify(image, model, classNames):
 
     # make a prediction using the loaded model
     prediction = model.predict(img_array)
-    print(prediction[0])
+    print(prediction[0][0])
 
-    if prediction[0] >= 0.5:
+    if prediction[0][0] >= 0.5:
         index = 1
-        confidence_score = prediction[0]
+        confidence_score = prediction[0][0]
     else:
         index = 0
-        confidence_score = 1 - prediction[0]
+        confidence_score = 1 - prediction[0][0]
         
     classname = classNames[index]
 
